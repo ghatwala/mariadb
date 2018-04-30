@@ -1,5 +1,4 @@
 language: bash
-sudo: required
 services: docker
 
 os:
@@ -27,11 +26,13 @@ before_script:
   - image="mariadb:$VERSION"
 
 script:
+  - whoami
+  - sudo service docker status
   - travis_retry sudo docker build -t "$image" .
   - ~/official-images/test/run.sh "$image"
 
 after_script:
-  - docker images
+  - sudo docker images
 
 # vim:set et ts=2 sw=2:
 
