@@ -1,8 +1,9 @@
 language: bash
 services: docker
+sudo: required
 
 os:
-  - linux
+  #- linux
   - linux-ppc64le
 
 env:
@@ -26,7 +27,8 @@ before_script:
   - image="mariadb:$VERSION"
 
 script:
-  - travis_retry docker build -t "$image" .
+  - docker manifest --help
+  - docker build -t "$image" .
   - ~/official-images/test/run.sh "$image"
 
 after_script:
